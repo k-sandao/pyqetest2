@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注意事項</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>注意事項</h1>
+
+    <div class="info">
+
+        <p>
+            本テストは、ぷよぷよ!!クエストに関する知識を問う
+            非公式のファン制作コンテンツです。
+        </p>
+
+        <hr>
+
+        <p>・全部で大門は６つ、全30問です。</p>
+        <p>・採点は最後にまとめて行われます。</p>
+        <p>・途中でページを閉じると回答内容が失われる場合があります。</p>
+        <p>・問題の無断転載はご遠慮ください。</p>
+
+    </div>
+
+    <div class="info">
+        <strong>受験者情報</strong>
+        <p id="userInfo"></p>
+    </div>
+
+    <button onclick="startExam()">
+        試験開始
+    </button>
+
+</div>
+
+<script>
+
+const nickname = localStorage.getItem("nickname") || "";
+const rank = localStorage.getItem("rank") || "";
+
+document.getElementById("userInfo").innerHTML =
+    `
+    ニックネーム：${nickname}<br>
+    ユーザーランク：${rank === "" ? "未入力" : rank}
+    `;
+
+function startExam(){
+    window.location.href = "test.html";
+}
+
+</script>
+
+</body>
+</html>

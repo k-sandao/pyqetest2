@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ぷよクエ共通テスト</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div style="text-align:right; margin-bottom:15px;">
+        <button onclick="location.href='post.html'">
+            問題投稿はこちら
+        </button>
+    </div>
+
+    <h1>第2回 ぷよクエ共通テスト</h1>
+
+    <p class="subtitle">
+        ぷよぷよ!!クエストに関する知識を問う非公式テスト
+    </p>
+
+    <div class="info">
+        全部で大門は6つ<br>
+        全30問<br>
+        採点は最後にまとめて行われます。
+    </div>
+
+    <label>ユーザーランク（任意）</label>
+    <input
+        type="number"
+        id="rank"
+        min="1"
+        max="4000"
+        placeholder="例：1200"
+    >
+
+    <label>ニックネーム（必須）</label>
+    <input
+        type="text"
+        id="nickname"
+        placeholder="ニックネームを入力"
+    >
+
+    <button onclick="startTest()">
+        注意事項へ進む
+    </button>
+
+    <div id="error" class="error"></div>
+
+</div>
+
+<script>
+
+function startTest(){
+
+    const nickname =
+        document.getElementById("nickname").value.trim();
+
+    const rank =
+        document.getElementById("rank").value;
+
+    if(nickname === ""){
+        document.getElementById("error").innerText =
+            "ニックネームを入力してください";
+        return;
+    }
+
+    if(rank !== ""){
+        const rankNum = Number(rank);
+
+        if(rankNum < 1 || rankNum > 4000){
+            document.getElementById("error").innerText =
+                "ユーザーランクは1～4000で入力してください";
+            return;
+        }
+    }
+
+    localStorage.setItem("nickname", nickname);
+    localStorage.setItem("rank", rank);
+
+    localStorage.setItem("testSessionId", Date.now().toString());
+
+    window.location.href = "attention.html";
+}
+
+</script>
+
+</body>
+</html>

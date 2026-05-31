@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>問題投稿フォーム</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>問題投稿フォーム</h1>
+
+    <div class="info">
+
+        <p>投稿された問題は、確認後に採用されます。</p>
+
+        <label>投稿者名</label>
+        <input type="text" id="name" placeholder="例：匿名希望さん">
+
+        <label>問題文</label>
+        <textarea id="question" placeholder="問題文を入力"></textarea>
+
+        <label>選択肢①</label>
+        <input type="text" id="choice1">
+
+        <label>選択肢②</label>
+        <input type="text" id="choice2">
+
+        <label>選択肢③</label>
+        <input type="text" id="choice3">
+
+        <label>選択肢④</label>
+        <input type="text" id="choice4">
+
+        <label>正解</label>
+        <select id="answer">
+            <option value="">選択してください</option>
+            <option value="①">①</option>
+            <option value="②">②</option>
+            <option value="③">③</option>
+            <option value="④">④</option>
+        </select>
+
+        <label>推定難易度</label>
+        <select id="difficulty">
+            <option value="初級">初級</option>
+            <option value="中級">中級</option>
+            <option value="上級">上級</option>
+            <option value="超上級">超上級</option>
+        </select>
+
+        <button onclick="submitQuestion()">投稿する</button>
+
+        <p id="result"></p>
+
+    </div>
+
+</div>
+
+<script>
+
+const GAS_URL =
+"https://script.google.com/macros/s/AKfycbyDLn3UccEHfvov-5wQ8X0IFgjZLPO7iHwniEB0zg0yH6ahLsRrZ1oTYduA8yF6dWIL/exec";
+
+async function submitQuestion(){
+
+    const data = {
+        name: document.getElementById("name").value.trim(),
+        question: document.getElementById("question").value.trim(),
+        choice1: document.getElementById("choice1").value.trim(),
+        choice2: document.getElementById("choice2").value.trim(),
+        choice3: document.getElementById("choice3").value.trim(),
+        choice4: document.getElementById("choice4").value.trim(),
+        answer: document.getElementById("answer").value,
+        difficulty: document.getElementById("difficulty").value
+    };
+
+    if(
+        !data.name ||
+        !data.question ||
+        !data.choice1 ||
+        !data.choice2 ||
+        !data.choice3 ||
+        !data.choice4 ||
+        !data.answer
+    ){
+        alert("未入力項目があります");
+        return;
+    }
+
+    document.getElementById("result").innerText = "送信中...";
+
+    try{
+
+        await fetch(GAS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data)
+        });
+
+        document.getElementById("result").innerText =
+            "投稿ありがとうございました！";
+
+        document.getElementById("name").value = "";
+        document.getElementById("question").value = "";
+        document.getElementById("choice1").value = "";
+        document.getElementById("choice2").value = "";
+        document.getElementById("choice3").value = "";
+        document.getElementById("choice4").value = "";
+        document.getElementById("answer").value = "";
+        document.getElementById("difficulty").value = "初級";
+
+    }catch(error){
+
+        console.error(error);
+        document.getElementById("result").innerText =
+            "送信に失敗しました";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
