@@ -122,3 +122,15 @@ p{
     margin-bottom:8px;
     color:#444;
 }
+
+textarea{
+    width:100%;
+    min-height:250px;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+    resize:vertical;
+    font-family:"Yu Gothic",sans-serif;
+    font-size:16px;
+}
