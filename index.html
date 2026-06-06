@@ -1,94 +1,107 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ぷよクエ共通テスト</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ぷよクエ共通テスト</title>
 
-    <link rel="stylesheet" href="style.css">
+<style>
+body{
+    font-family:"Yu Gothic",sans-serif;
+    background:#eef7ff;
+    margin:0;
+    padding:0;
+}
+
+.container{
+    max-width:800px;
+    margin:60px auto;
+    background:white;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+h1{
+    color:#2b7de9;
+    margin-bottom:20px;
+}
+
+.notice{
+    background:#f5fbff;
+    border:1px solid #d7ebff;
+    border-radius:10px;
+    padding:25px;
+    margin:30px 0;
+    line-height:1.8;
+}
+
+.button{
+    display:inline-block;
+    background:#2b7de9;
+    color:white;
+    text-decoration:none;
+    padding:16px 32px;
+    border-radius:10px;
+    font-size:20px;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+.button:hover{
+    opacity:0.9;
+}
+
+.old-links{
+    margin-top:40px;
+}
+
+.old-links a{
+    display:block;
+    margin:10px 0;
+    color:#2b7de9;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div style="text-align:right; margin-bottom:15px;">
-        <button onclick="location.href='post.html'">
-            問題投稿はこちら
-        </button>
+    <h1>ぷよクエ共通テスト</h1>
+
+    <div class="notice">
+        <h2>サイト移転のお知らせ</h2>
+
+        <p>
+            ぷよクエ共通テストは新サイトへ移行しました。<br>
+            第1回・第2回に加え、今後のテストも新サイトで公開します。
+        </p>
+
+        <p>
+            今後はこちらのサイトをご利用ください。
+        </p>
+
+        <a class="button"
+           href="https://k-sandao.github.io/pyqealltest/index.html">
+            新サイトへ移動する
+        </a>
     </div>
 
-    <h1>第2回 ぷよクエ共通テスト</h1>
+    <div class="old-links">
+        <p>旧サイト</p>
 
-    <p class="subtitle">
-        ぷよぷよ!!クエストに関する知識を問う非公式テスト
-    </p>
+        <a href="https://k-sandao.github.io/pyqetest/">
+            第1回ぷよクエ共通テスト
+        </a>
 
-    <div class="info">
-        全部で大門は6つ<br>
-        全30問<br>
-        採点は最後にまとめて行われます。
+        <a href="https://k-sandao.github.io/pyqetest2/">
+            第2回ぷよクエ共通テスト
+        </a>
     </div>
-
-    <label>ユーザーランク（任意）</label>
-    <input
-        type="number"
-        id="rank"
-        min="1"
-        max="4000"
-        placeholder="例：1200"
-    >
-
-    <label>ニックネーム（必須）</label>
-    <input
-        type="text"
-        id="nickname"
-        placeholder="ニックネームを入力"
-    >
-
-    <button onclick="startTest()">
-        注意事項へ進む
-    </button>
-
-    <div id="error" class="error"></div>
 
 </div>
-
-<script>
-
-function startTest(){
-
-    const nickname =
-        document.getElementById("nickname").value.trim();
-
-    const rank =
-        document.getElementById("rank").value;
-
-    if(nickname === ""){
-        document.getElementById("error").innerText =
-            "ニックネームを入力してください";
-        return;
-    }
-
-    if(rank !== ""){
-        const rankNum = Number(rank);
-
-        if(rankNum < 1 || rankNum > 4000){
-            document.getElementById("error").innerText =
-                "ユーザーランクは1～4000で入力してください";
-            return;
-        }
-    }
-
-    localStorage.setItem("nickname", nickname);
-    localStorage.setItem("rank", rank);
-
-    localStorage.setItem("testSessionId", Date.now().toString());
-
-    window.location.href = "attention.html";
-}
-
-</script>
 
 </body>
 </html>
